@@ -1,0 +1,23 @@
+{
+    "name": "docker-hands-on",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "remoteUser": "root",
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker": {
+            "version": "latest",
+            "moby": false
+        }
+    },
+    "containerEnv": {
+        "TZ": "Asia/Tokyo"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "MS-CEINTL.vscode-language-pack-ja",
+                "ms-azuretools.vscode-containers",
+                "ms-ossdata.vscode-pgsql"
+            ]
+        }
+    }
+}
