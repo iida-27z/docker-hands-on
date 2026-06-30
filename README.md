@@ -238,7 +238,7 @@ services:
     ports:
       - "5432:5432"
 ```
-この時、`POSTGRES_USER`や`POSTGRES_PASSWORD`などの認証情報の値は、直接docker-compose.ymlに書くのではなく、同じ階層に配置する`.env`という名前のファイルに定義しておき、`gitignore`に追加しておくことで、これらの情報をGitHubなどのリモートリポジトリにアップロードしないようにするのが一般的です。`.env`ファイルの内容は以下の通りです。docker-compose.yml側の`${}`で囲まれた部分が、`.env`ファイルで定義した値に置き換えられます。
+この時、`POSTGRES_USER`や`POSTGRES_PASSWORD`などの認証情報の値は、直接docker-compose.ymlに書くのではなく、同じ階層に配置する`.env`という名前のファイルに定義しておき、`gitignore`に追加しておくことで、これらの情報をGitHubなどのリモートリポジトリにアップロードしないようにするのが一般的です。このリポジトリには`.env.example`も用意しているので、必要に応じてコピーして`.env`を作成してください。`.env`ファイルの内容は以下の通りです。docker-compose.yml側の`${}`で囲まれた部分が、`.env`ファイルで定義した値に置き換えられます。
 ```env title=".env"
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=mysecretpassword
@@ -292,7 +292,7 @@ docker compose down
     docker rmi <イメージ名またはイメージID>
     ```
 #### 2. Dockerfile
-ハンズオンではコンテナの起動方法についての設定ファイルとして、docker-compose.ymlを紹介しましたが、Dockerfileを使ってイメージをカスタマイズすることも可能です。Dockerfileは、コンテナのイメージを作成するための手順を記述したファイルで、ベースとなるイメージの指定や、必要なパッケージのインストール、環境変数の設定などを行うことができます。Dockerfileを使うことで、より柔軟にコンテナ環境を構築することができます。以下はJava25とGitが使用できるubuntuベースのカスタムイメージを作成するためのDockerfileの例です。
+ハンズオンではコンテナの起動方法についての設定ファイルとして、docker-compose.ymlを紹介しましたが、Dockerfileを使ってイメージをカスタマイズすることも可能です。Dockerfileは、コンテナのイメージを作成するための手順を記述したファイルで、ベースとなるイメージの指定や、必要なパッケージのインストール、環境変数の設定などを行うことができます。Dockerfileを使うことで、より柔軟にコンテナ環境を構築することができます。以下はJava 21とGitが使用できるubuntuベースのカスタムイメージを作成するためのDockerfileの例です。
 ```Dockerfile title="Dockerfile"
 # ベースイメージの指定
 FROM ubuntu:latest
@@ -302,7 +302,7 @@ ENV TZ=Asia/Tokyo
 
 # 必要なパッケージのインストール
 RUN apt-get update && \
-    apt-get install -y openjdk-25-jdk git && \
+    apt-get install -y openjdk-21-jdk git && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
